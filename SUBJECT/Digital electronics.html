@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital electronics</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ruda:wght@400;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(77, 14, 203);
+  background: radial-gradient(
+    circle,
+    rgba(77, 14, 203, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  font-family: "poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.quiz-header h2 {
+  font-size: 1.5rem;
+}
+
+.quiz-header p {
+  background: #111;
+  padding: 0.4rem 1rem;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.quiz-body {
+  padding: 2rem 2rem;
+}
+
+.quiz-body h2 {
+  padding: 1rem 0;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.quiz-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-body ul li {
+  margin: 1rem 0;
+  font-size: 1rem;
+  border: 1px solid #aab7b8;
+  padding: 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quiz-body ul li label {
+  cursor: pointer;
+  padding: 0 0.4rem;
+}
+
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-footer button {
+  padding: 0.6rem 1.5rem;
+  outline: none;
+  background: #111;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+  transition: 0.3s ease-in-out;
+}
+
+.quiz-body button {
+  padding: 0.6rem 1rem;
+  outline: none;
+  background: #111;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+  transition: 0.3s ease-in-out;
+  display: block;
+  margin: 0 auto;
+}
+
+.quiz-footer button:hover {
+  opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+          <h2 class="header-txt">Pranab Quiz</h2>
+        </div>
+        <div class="quiz-body">
+          <h2 id="question">Question Text</h2>
+          <ul>
+            <li>
+              <input type="radio" name="answer" id="a" class="answer" />
+              <label for="a" id="a_text">Questions</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="b" class="answer" />
+              <label for="b" id="b_text">Questions</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="c" class="answer" />
+              <label for="c" id="c_text">Questions</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="d" class="answer" />
+              <label for="d" id="d_text">Questions</label>
+            </li>
+          </ul>
+        </div>
+        <div class="quiz-footer">
+          <div class="quiz-details"></div>
+          <button type="button" id="btn">Submit</button>
+        </div>
+      </div>
+<script >
+ "use strict";
+
+const quizData = [
+{
+  question: "How many input combinations are possible for a 3-input AND gate?",
+  a: "2",
+  b: "3",
+  c: " 4 ",
+  d: "8",
+  correct: "c"
+ },
+ {
+  question: "What is the output of an XOR gate if both inputs are the same?",
+  a: "0",
+  b: "1",
+  c: " It depends on the other inputs ",
+  d: "Cannot be determined",
+  correct: "a"
+ },
+ {
+  question: "Which logic gate produces an output of 1 only when all its inputs are 0?",
+  a: "OR gate",
+  b: "NAND gate",
+  c: "  XOR gate ",
+  d: "NOR gate",
+  correct: "d"
+ },
+ {
+  question: "How many output states are possible for a 4-bit binary counter?",
+  a: "4",
+  b: "8",
+  c: " 16 ",
+  d: "32",
+  correct: "c"
+ },
+ {
+  question: "In which flip-flop does the output change on the rising edge of the clock signal?",
+  a: " SR flip-flop",
+  b: "D flip-flop",
+  c: " JK flip-flop ",
+  d: "T flip-flop",
+  correct: "b"
+ },
+ {
+  question: "What is the purpose of a multiplexer (MUX)?",
+  a: "To perform addition",
+  b: "To combine multiple inputs into a single output",
+  c: "To amplify signals  ",
+  d: "To generate clock pulses",
+  correct: "b"
+ },
+ {
+  question: "Which logic gate is equivalent to the expression:(A+B).C ?",
+  a: "AND",
+  b: "OR",
+  c: "  NOT",
+  d: "NAND",
+  correct: "B"
+ },
+ {
+  question: "What is the complement of the binary number 1011?",
+  a: " 0101",
+  b: "1100",
+  c: " 0100 ",
+  d: "1110",
+  correct: "b"
+ },
+ {
+  question: "Which statement about a flip-flop is true?",
+  a: "It can store multiple bits of data simultaneously",
+  b: "It has more than two input states",
+  c: "  It retains its state even after the clock signal is removed",
+  d: " It always changes state in response to the clock signal",
+  correct: "c"
+ },
+ {
+  question: "What is the decimal equivalent of the binary number 1101?",
+  a: "7",
+  b: "10",
+  c: " 13 ",
+  d: "15",
+  correct: "c"
+ },
+ 
+];
+
+const quiz = document.querySelector(".quiz-body");
+const answerEl = document.querySelectorAll(".answer");
+const questionEl = document.getElementById("question");
+const footerEl = document.querySelector(".quiz-footer");
+const quizDetailEl = document.querySelector(".quiz-details");
+const liEl = document.querySelector("ul li");
+
+const a_txt = document.getElementById("a_text");
+const b_txt = document.getElementById("b_text");
+const c_txt = document.getElementById("c_text");
+const d_txt = document.getElementById("d_text");
+const btnSubmit = document.getElementById("btn");
+
+let currentQuiz = 0;
+let score = 0;
+
+loadQuiz();
+
+function loadQuiz() {
+ deselectAnswers();
+ const currentQuizData = quizData[currentQuiz];
+ questionEl.innerText = currentQuizData.question;
+ a_txt.innerText = currentQuizData.a;
+ b_txt.innerText = currentQuizData.b;
+ c_txt.innerText = currentQuizData.c;
+ d_txt.innerText = currentQuizData.d;
+ quizDetailEl.innerHTML = `<p>${currentQuiz + 1} of ${quizData.length}</p>`;
+}
+
+// deselect
+function deselectAnswers() {
+ answerEl.forEach((answerEl) => {
+  answerEl.checked = false;
+ });
+}
+
+// get selected
+function getSelected() {
+ let answer;
+ answerEl.forEach((answerEls) => {
+  if (answerEls.checked) {
+   answer = answerEls.id;
+  }
+ });
+ return answer;
+}
+
+btnSubmit.addEventListener("click", function () {
+ const answers = getSelected();
+
+ if (answers) {
+  if (answers === quizData[currentQuiz].correct) {
+   score++;
+  }
+  nextQuestion();
+ }
+});
+
+// next Slide
+function nextQuestion() {
+ currentQuiz++;
+
+ if (currentQuiz < quizData.length) {
+  loadQuiz();
+ } else {
+  quiz.innerHTML = `<h2>You answered ${score}/${quizData.length} question correctly</h2>
+    <button type="button" onclick="location.reload()">Reload</button>
+    `;
+  footerEl.style.display = "none";
+ }
+}   
+</script>
+</body>
+</html>
